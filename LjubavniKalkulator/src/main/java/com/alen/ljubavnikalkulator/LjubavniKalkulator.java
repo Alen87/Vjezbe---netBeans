@@ -4,6 +4,9 @@
  */
 package com.alen.ljubavnikalkulator;
 
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alen
@@ -11,10 +14,11 @@ package com.alen.ljubavnikalkulator;
 public class LjubavniKalkulator extends javax.swing.JFrame {
 
     /**
-     * Creates new form Ljubavnikalkulator
+     * Creates new form LjubavniKalkulator
      */
     public LjubavniKalkulator() {
         initComponents();
+        
     }
 
     /**
@@ -120,8 +124,72 @@ public class LjubavniKalkulator extends javax.swing.JFrame {
 
     private void btnGumbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGumbActionPerformed
 
+        String ime1 = txtUnesiIme1.getText();
+        String ime2 = txtUnesiIme2.getText();
+        
+        String zbrojImena = ime1.trim().toLowerCase() + ime2.trim().toLowerCase();
+        
+       StringBuilder zbroj = new StringBuilder();
+
+		int brojac;
+
+		for (int i = 0; i < zbrojImena.length(); i++) {
+			brojac = 0;
+			for (int j = 0; j < zbrojImena.length(); j++) {
+				if (zbrojImena.charAt(i) == zbrojImena.charAt(j)) {
+					brojac++;
+				}
+			}
+			zbroj.append(brojac);
+		}
+
+		System.out.println(zbroj);
+		izracunaj(zbroj.toString());
+      
+           taRezultat.setText(zbroj.toString());
+          
+        
+        
+        
+    
+        
+        
     }//GEN-LAST:event_btnGumbActionPerformed
 
+    private static int izracunaj(String niz){
+        
+      if (niz.length() <= 2) {
+			return Integer.parseInt(niz);
+		}
+
+		StringBuilder noviNiz = new StringBuilder();
+		String[] nizVrijednosti = niz.split("");
+		for (int i = 0, j = niz.length() - 1; i <= j; i++, j--) {
+			if (i == j) {
+				noviNiz.append(nizVrijednosti[i]);
+				break;
+			}
+			noviNiz.append(Integer.parseInt(nizVrijednosti[i]) + Integer.parseInt(nizVrijednosti[j]));
+
+		}
+
+		System.out.println(noviNiz);
+		return izracunaj(noviNiz.toString());  
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
