@@ -76,6 +76,12 @@ public class LjubavniKalkulator extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(70, 70, 70))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
@@ -83,21 +89,15 @@ public class LjubavniKalkulator extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtUnesiIme2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(btnGumb))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(btnGumb)))
+                        .addGap(55, 55, 55)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(10, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(70, 70, 70))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,8 +115,8 @@ public class LjubavniKalkulator extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -126,7 +126,7 @@ public class LjubavniKalkulator extends javax.swing.JFrame {
 
         String ime1 = txtUnesiIme1.getText();
         String ime2 = txtUnesiIme2.getText();
-        
+        StringBuilder ispis=new StringBuilder();
         String zbrojImena = ime1.trim().toLowerCase() + ime2.trim().toLowerCase();
         
        StringBuilder zbroj = new StringBuilder();
@@ -141,13 +141,16 @@ public class LjubavniKalkulator extends javax.swing.JFrame {
 				}
 			}
 			zbroj.append(brojac);
+                      
+
 		}
 
-		System.out.println(zbroj);
-		izracunaj(zbroj.toString());
-      
-           taRezultat.setText(zbroj.toString());
-          
+		
+		
+      		
+            ispis.append(zbroj.toString());
+            ispis.append("\n");
+           taRezultat.setText(izracunaj(zbroj.toString(),ispis));
         
         
         
@@ -156,10 +159,10 @@ public class LjubavniKalkulator extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnGumbActionPerformed
 
-    private static int izracunaj(String niz){
+    public  static String izracunaj(String niz,StringBuilder ispis){
         
-      if (niz.length() <= 2) {
-			return Integer.parseInt(niz);
+     if (niz.length() <= 2) {
+			return ispis.toString();
 		}
 
 		StringBuilder noviNiz = new StringBuilder();
@@ -170,13 +173,11 @@ public class LjubavniKalkulator extends javax.swing.JFrame {
 				break;
 			}
 			noviNiz.append(Integer.parseInt(nizVrijednosti[i]) + Integer.parseInt(nizVrijednosti[j]));
-
+                   
 		}
-
-		System.out.println(noviNiz);
-		return izracunaj(noviNiz.toString());  
-        
-        
+                 ispis.append(noviNiz.toString());
+		 ispis.append("\n");
+		return izracunaj(noviNiz.toString(),ispis);
         
         
     }
